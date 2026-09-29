@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <LangVersion>9.0</LangVersion>
+    <IsPackable>false</IsPackable>
+    <RootNamespace>VrAction.Core.Tests</RootNamespace>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="**/*.cs" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.*" />
+    <PackageReference Include="NUnit" Version="3.*" />
+    <PackageReference Include="NUnit3TestAdapter" Version="4.*" />
+    <ProjectReference Include="../Core.csproj" />
+  </ItemGroup>
+</Project>

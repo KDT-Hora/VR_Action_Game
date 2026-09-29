@@ -1,0 +1,20 @@
+# .NET build output (kept outside Core/ so Unity does not import it)
+.build/
+bin/
+obj/
+# Unity
+Game/Library/
+Game/Temp/
+Game/Obj/
+Game/Logs/
+Game/UserSettings/
+Game/Build/
+Game/Builds/
+*.csproj.user
+*.sln.user
+# OS/editor
+.DS_Store
+Thumbs.db
+*.swp
+.vscode/
+.idea/

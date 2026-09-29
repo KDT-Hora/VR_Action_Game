@@ -1,0 +1,7 @@
+{
+  "name": "com.kdt.vraction.core",
+  "displayName": "VR Action Core",
+  "version": "0.1.0",
+  "unity": "6000.0",
+  "description": "Unity-independent core logic: spatial abstraction, deterministic stage generation, serialization."
+}

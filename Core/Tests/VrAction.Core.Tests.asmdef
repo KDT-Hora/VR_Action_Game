@@ -1,0 +1,11 @@
+{
+  "name": "VrAction.Core.Tests",
+  "rootNamespace": "VrAction.Core.Tests",
+  "references": ["VrAction.Core", "UnityEngine.TestRunner", "UnityEditor.TestRunner"],
+  "includePlatforms": ["Editor"],
+  "overrideReferences": true,
+  "precompiledReferences": ["nunit.framework.dll"],
+  "autoReferenced": false,
+  "defineConstraints": ["UNITY_INCLUDE_TESTS"],
+  "optionalUnityReferences": ["TestAssemblies"]
+}
