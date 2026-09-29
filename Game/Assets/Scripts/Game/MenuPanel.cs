@@ -19,6 +19,10 @@ namespace VrAction.Game.Game
 
         public bool Visible => gameObject.activeSelf;
         public IReadOnlyList<string> Labels => _labels;
+        public string Title => _title;
+
+        /// <summary>Confirms option i (used by input and tests).</summary>
+        public void Select(int i) { _onChoose?.Invoke(i); }
 
         public static MenuPanel Create(Transform head)
         {
@@ -68,6 +72,12 @@ namespace VrAction.Game.Game
             Show("Stage cleared! Next:", labels, i => { if (menu.Choose(menu.Options[i])) Hide(); });
         }
 
+        /// <summary>Sharing exports the shape of the player's room, so it needs a clear yes (FR-025).</summary>
+        public void ShowShareConsent(System.Action<bool> result)
+        {
+            Show("Sharing includes the shape of your room. Share?", new[] { "Yes, share", "No" }, i => { Hide(); result(i == 0); });
+        }
+
         void Show(string title, IEnumerable<string> options, System.Action<int> onChoose)
         {
             _labels.Clear(); _labels.AddRange(options);
@@ -101,7 +111,7 @@ namespace VrAction.Game.Game
                 _navCooldown = 0.25f;
                 Redraw(_title);
             }
-            if (_confirm.WasPressedThisFrame()) _onChoose?.Invoke(_index);
+            if (_confirm.WasPressedThisFrame()) Select(_index);
         }
     }
 }

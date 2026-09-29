@@ -298,6 +298,24 @@ namespace VrAction.Game.Tests
         }
     }
 
+    public class ShareConsentTests
+    {
+        [Test]
+        public void ConsentDialog_ExplainsRoomShapeIsShared_AndReportsChoice()
+        {
+            var panel = MenuPanel.Create(new GameObject("head").transform);
+            bool? result = null;
+            panel.ShowShareConsent(r => result = r);
+            StringAssert.Contains("room", panel.Title.ToLower());
+            Assert.AreEqual(2, panel.Labels.Count);
+            panel.Select(1);
+            Assert.AreEqual(false, result);
+            panel.ShowShareConsent(r => result = r);
+            panel.Select(0);
+            Assert.AreEqual(true, result);
+        }
+    }
+
     public class SafetyBehaviourTests
     {
         [Test]

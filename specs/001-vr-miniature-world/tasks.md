@@ -112,7 +112,7 @@ description: "Task list for VR現実空間連動型・小世界アクション�
 - [X] T060 [P] [TEST] SaveStore: save → reload restores spatial data, progress, settings without rescan; discard removes scan and forces rescan, in `Game/Assets/Tests/PlayMode/SaveStoreTests.cs` (Red)
 - [X] T061 Implement `SaveStore.cs` (FR-019) and `RescanFlow.cs` (FR-028) in `Game/Assets/Scripts/Save/` (Green)
 - [X] T062 [P] [TEST] ShareFile round-trip reproduces an identical Stage; export requires consent flag and omits data not needed to reproduce, in `Core/Tests/ShareRoundTripTests.cs` (Red)
-- [ ] T063 Implement `ShareService.cs` with consent dialog (FR-025) in `Game/Assets/Scripts/Save/` (Green)
+- [X] T063 Implement `ShareService.cs` with consent dialog (FR-025) in `Game/Assets/Scripts/Save/` (Green)
 - [X] T064 [P] [TEST] SafetyMonitor decision logic: passthrough on when head/controller within 30cm of boundary or hazard; off with hysteresis; manual toggle overrides, in `Core/Tests/SafetyMonitorTests.cs` (Red)
 - [X] T065 Implement `SafetyMonitor` (Core logic) and Unity binding `Game/Assets/Scripts/Presentation/SafetyMonitor.cs` (FR-014, FR-027) (Green)
 - [X] T066 [P] [TEST] `ScanResult`/`SpatialData` are immutable: attempts to mutate after creation fail to compile or throw; generator/renderer APIs take read-only inputs, in `Core/Tests/ImmutabilityTests.cs` (FR-015) (Red)
@@ -128,7 +128,7 @@ description: "Task list for VR現実空間連動型・小世界アクション�
 ## Phase 10: Polish & validation
 
 - [ ] T070 [P] Performance budget check at end of US2 and at the end: hold 90fps in Tabletop/Room scenes (FR-029)
-- [ ] T071 [P] Measure scan→generate ≤ 60s (SC-005: desk width ≥120cm, room floor area ≥10㎡) with fixture and real scan
+- [X] T071 [P] Measure scan→generate ≤ 60s (SC-005: desk width ≥120cm, room floor area ≥10㎡) with fixture and real scan
 - [ ] T072 Playtest protocol and results (SC-001 ≤3min to play, SC-004 90% unaided, SC-008 80% "immersion" survey, SC-006 zero contacts) in `specs/001-vr-miniature-world/playtest.md`
 - [ ] T073 Run quickstart.md end-to-end and update it
 

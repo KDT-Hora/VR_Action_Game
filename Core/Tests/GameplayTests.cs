@@ -268,4 +268,18 @@ namespace VrAction.Core.Tests
             }
         }
     }
+
+    public class PerformanceTests
+    {
+        [Test]
+        public void ScanToStage_OnRoomFixture_IsWellUnderOneMinute()
+        {
+            var sw = System.Diagnostics.Stopwatch.StartNew();
+            var space = new VrAction.Core.SpatialAbstraction.RoomAbstractor().Abstract(ScanFixtures.Room()).Data;
+            var o = new StageGenerator().Generate(space, new GenerationRequest(1, StageType.Combat, DifficultyMode.NoDeath));
+            sw.Stop();
+            Assert.IsTrue(o.IsSuccess);
+            Assert.Less(sw.ElapsedMilliseconds, 5000, "SC-005 allows 60s including the scan; generation must be a small fraction");
+        }
+    }
 }
