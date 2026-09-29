@@ -29,11 +29,13 @@
 
 ## Constitution Check
 
-`.specify/memory/constitution.md` は未策定(テンプレートのまま)のため、ゲートなし。ただし本計画の自主原則として次を置く:
-1. 生成コアは UnityEngine を参照しない
-2. 乱数は自前の決定論的PRNG(System.Random 非依存)のみ
-3. 生成後に必ず到達可能性検証を実行する
-→ 違反なし。設計後も再確認済み。
+憲章 v1.0.0(`.specify/memory/constitution.md`)の原則に照らして確認:
+- I TDD: 全タスクをテスト先行で並べる(tasks.md)
+- II 決定論: 自前PRNG+整数グリッド
+- III 機械学習/生成AI不使用: ルールベースのみ
+- IV コア分離: `Core/` は UnityEngine 非依存、Unityへは UPM ローカルパッケージ(`Game/Packages/com.kdt.vraction.core`)として取り込む
+- V 安全とプライバシー: 自動パススルー、共有前の同意
+→ 違反なし。
 
 ## Project Structure
 
@@ -63,14 +65,14 @@ Game/                                 # Unity プロジェクト
 │   │   ├── Game/                     # ステージ進行、難易度モード、UI
 │   │   └── Save/                     # 保存・共有のIO
 │   └── Tests/PlayMode/
-Core/                                 # 純C#ライブラリ(Unity非依存)
+Core/                                 # 純C#ライブラリ(Unity非依存、UPMローカルパッケージとして Game から参照)
 ├── SpatialAbstraction/               # スキャン結果 → 空間データ
 ├── StageGeneration/                  # ルールベース生成、検証
 ├── Rng/                              # 決定論的PRNG
 └── Tests/                            # EditMode相当のテスト(Unityからも参照)
 ```
 
-**Structure Decision**: `Core/`(純C#)+ `Game/`(Unity)の2部構成。CoreはUnityのasmdefとして取り込むか、DLLとして参照する。
+**Structure Decision**: `Core/`(純C#)+ `Game/`(Unity)の2部構成。Core は package.json と asmdef を持つUPMローカルパッケージとし、`Game/Packages/manifest.json` で `file:../../Core` として参照する。テストは `dotnet test` でも Unity Test Runner でも実行できる。
 
 ## Complexity Tracking
 

@@ -1,50 +1,35 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+# VR Action Game Constitution
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### I. Test-First / TDD (NON-NEGOTIABLE)
+すべての実装は Red→Green→Refactor で行う。失敗するテストを先に書き、失敗を確認してから実装する。tasks.md ではテストタスクを対応する実装タスクの直前に置く。
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+### II. 決定論的な生成
+ステージ生成は同一入力(空間データ・シード・生成条件)から必ず同一結果を返す。乱数は自前の決定論的PRNGのみ、浮動小数の環境差は整数グリッドへの量子化で排除する。
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+### III. ゲーム内で機械学習/生成AIを使用しない
+ステージ生成・判断に機械学習・生成AIを使わない。ルールベース・アルゴリズム・状態機械による従来型のゲームロジック(敵の行動を含む)は許可する。
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+### IV. コアとエンジンの分離
+生成・空間抽象化・シリアライズは Unity 非依存の純C#(`Core/`)に置き、Unity 側(`Game/`)はスキャン取得・描画・入力のみを担う。
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+### V. 安全とプライバシー
+プレイ中に現実の家具を移動・破壊させない。境界接近時はパススルーで安全を確保する。空間データを共有する場合はユーザーの明示的な確認を必須とし、含める情報を最小化する。
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+## Constraints
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
+- 生成後に必ず到達可能性を検証する(開始地点→ゴール)
+- 保存・共有ファイルはバージョン付きJSON。未知バージョンは拒否する
+- 目標性能: 90fps、スキャン→生成 60秒以内
 
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
+## Development Workflow
 
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+- 機能ごとにブランチを分け、仕様→計画→タスク→実装の順に進める
+- 各コミットはテストが通る状態にする
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+本憲章は他のプロセスに優先する。変更は明示的な憲章更新として記録する。
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+**Version**: 1.0.0 | **Ratified**: 2026-09-29 | **Last Amended**: 2026-09-29
