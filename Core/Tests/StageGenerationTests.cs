@@ -75,7 +75,7 @@ namespace VrAction.Core.Tests
             var kinds = new CellKind[w * d];
             for (int z = 0; z < d; z++)
                 for (int x = 0; x < w; x++) kinds[z * w + x] = x == 12 ? CellKind.Wall : CellKind.Ground;
-            var space = new SpatialData(PlayMode.Tabletop, 50, w, d, 0, 0, kinds, new int[w * d], new bool[w * d]);
+            var space = new SpatialData(SpaceMode.Tabletop, 50, w, d, 0, 0, kinds, new int[w * d], new bool[w * d]);
             var req = new GenerationRequest(1, StageType.Exploration, DifficultyMode.NoDeath);
             var path = new List<Cell> { new Cell(1, 1), new Cell(22, 1) };
             var st = new Stage(req, new Cell(1, 1), new Cell(22, 1), path, new StageElement[0], ObjectiveKind.ReachGoal);

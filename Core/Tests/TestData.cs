@@ -22,7 +22,7 @@ namespace VrAction.Core.Tests
         }
 
         /// <summary>Flat all-Ground grid for unit tests of small logic.</summary>
-        public static SpatialData Flat(int w, int d, PlayMode mode = PlayMode.Tabletop)
+        public static SpatialData Flat(int w, int d, SpaceMode mode = SpaceMode.Tabletop)
         {
             var kinds = new CellKind[w * d];
             for (int i = 0; i < kinds.Length; i++) kinds[i] = CellKind.Ground;

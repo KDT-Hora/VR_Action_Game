@@ -37,7 +37,7 @@ namespace VrAction.Core.Serialization
 
         public static SpatialData FromObject(Dictionary<string, object> o)
         {
-            var mode = (PlayMode)Enum.Parse(typeof(PlayMode), MiniJson.Str(MiniJson.Get(o, "mode")));
+            var mode = (SpaceMode)Enum.Parse(typeof(SpaceMode), MiniJson.Str(MiniJson.Get(o, "mode")));
             int cell = (int)MiniJson.Long(MiniJson.Get(o, "cellSizeMm"));
             int w = (int)MiniJson.Long(MiniJson.Get(o, "width"));
             int dp = (int)MiniJson.Long(MiniJson.Get(o, "depth"));

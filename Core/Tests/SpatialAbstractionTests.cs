@@ -12,7 +12,7 @@ namespace VrAction.Core.Tests
         public void DeskFixture_ProducesExpectedGrid()
         {
             var d = TestData.Desk();
-            Assert.AreEqual(PlayMode.Tabletop, d.Mode);
+            Assert.AreEqual(SpaceMode.Tabletop, d.Mode);
             Assert.AreEqual(50, d.CellSizeMm);
             Assert.AreEqual(24, d.Width);
             Assert.AreEqual(12, d.Depth);

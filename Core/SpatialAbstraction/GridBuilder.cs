@@ -65,7 +65,7 @@ namespace VrAction.Core.SpatialAbstraction
             return hz;
         }
 
-        public SpatialData Build(PlayMode mode, bool outsideIsHazard)
+        public SpatialData Build(SpaceMode mode, bool outsideIsHazard)
             => new SpatialData(mode, Cell, Width, Depth, OriginX, OriginZ, Kinds, Heights, ComputeHazards(outsideIsHazard));
     }
 }

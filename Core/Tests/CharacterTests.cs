@@ -87,6 +87,17 @@ namespace VrAction.Core.Tests
         }
 
         [Test]
+        public void SetHorizontal_OverridesPositionWithoutTouchingHeight()
+        {
+            var m = CharacterMotor.ForHeight(0.10f);
+            m.Teleport(1f, 2f, 3f);
+            m.SetHorizontal(4f, 5f);
+            Assert.AreEqual(4f, m.X);
+            Assert.AreEqual(5f, m.Z);
+            Assert.AreEqual(2f, m.Y);
+        }
+
+        [Test]
         public void Gravity_KeepsCharacterOnRaisedGround()
         {
             var m = CharacterMotor.ForHeight(0.10f);

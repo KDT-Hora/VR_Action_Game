@@ -52,7 +52,7 @@ namespace VrAction.Core.Tests
         public void RoomFixture_HasExpectedCellKinds()
         {
             var r = TestData.Room();
-            Assert.AreEqual(PlayMode.Room, r.Mode);
+            Assert.AreEqual(SpaceMode.Room, r.Mode);
             Assert.AreEqual(80, r.Width);
             Assert.AreEqual(60, r.Depth);
             Assert.AreEqual(CellKind.Wall, r.KindAt(0, 30), "perimeter wall");

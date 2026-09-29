@@ -1,0 +1,8 @@
+{
+  "name": "VrAction.Game.Editor",
+  "rootNamespace": "VrAction.Game.EditorTools",
+  "references": ["VrAction.Game"],
+  "includePlatforms": ["Editor"],
+  "excludePlatforms": [],
+  "autoReferenced": true
+}

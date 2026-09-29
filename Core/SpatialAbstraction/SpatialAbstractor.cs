@@ -34,7 +34,7 @@ namespace VrAction.Core.SpatialAbstraction
                     if (rel > g.Heights[i]) g.Heights[i] = rel;
                 });
             }
-            return AbstractionResult.Ok(g.Build(PlayMode.Tabletop, outsideIsHazard: true));
+            return AbstractionResult.Ok(g.Build(SpaceMode.Tabletop, outsideIsHazard: true));
         }
     }
 

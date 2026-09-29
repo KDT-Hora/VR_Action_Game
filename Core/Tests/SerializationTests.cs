@@ -12,7 +12,7 @@ namespace VrAction.Core.Tests
             var kinds = new[] { CellKind.Ground, CellKind.Ground, CellKind.Wall, CellKind.Platform, CellKind.Void, CellKind.Obstacle };
             var heights = new[] { 0, 0, 0, 300, 0, 100 };
             var hazards = new[] { false, true, false, false, false, false };
-            return new SpatialData(PlayMode.Room, 50, 3, 2, -100, 250, kinds, heights, hazards);
+            return new SpatialData(SpaceMode.Room, 50, 3, 2, -100, 250, kinds, heights, hazards);
         }
 
         [Test]

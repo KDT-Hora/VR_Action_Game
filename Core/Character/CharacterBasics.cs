@@ -63,6 +63,8 @@ namespace VrAction.Core.Character
             return new CharacterMotor(heightMetres * 3f, (float)Math.Sqrt(2f * g * heightMetres * 1.2f), g);
         }
 
+        public void SetHorizontal(float x, float z) { X = x; Z = z; }
+
         public void Teleport(float x, float y, float z)
         {
             X = x; Y = y; Z = z; VelocityY = 0f; IsGrounded = true;

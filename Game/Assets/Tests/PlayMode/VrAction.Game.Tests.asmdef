@@ -1,0 +1,14 @@
+{
+  "name": "VrAction.Game.Tests",
+  "rootNamespace": "VrAction.Game.Tests",
+  "references": ["VrAction.Game", "VrAction.Core", "UnityEngine.TestRunner", "UnityEditor.TestRunner"],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": true,
+  "precompiledReferences": ["nunit.framework.dll"],
+  "autoReferenced": false,
+  "defineConstraints": ["UNITY_INCLUDE_TESTS"],
+  "versionDefines": [],
+  "noEngineReferences": false
+}

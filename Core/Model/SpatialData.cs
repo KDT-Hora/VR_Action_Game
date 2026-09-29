@@ -4,7 +4,7 @@ namespace VrAction.Core.Model
 {
     public enum CellKind : byte { Void = 0, Ground = 1, Wall = 2, Obstacle = 3, Platform = 4 }
 
-    public enum PlayMode { Tabletop, Room }
+    public enum SpaceMode { Tabletop, Room }
 
     /// <summary>Simplified game-space grid. Immutable; arrays are copied in and never exposed.</summary>
     public sealed class SpatialData
@@ -18,9 +18,9 @@ namespace VrAction.Core.Model
         public int Depth { get; }
         public int OriginXMm { get; }
         public int OriginZMm { get; }
-        public PlayMode Mode { get; }
+        public SpaceMode Mode { get; }
 
-        public SpatialData(PlayMode mode, int cellSizeMm, int width, int depth, int originXMm, int originZMm,
+        public SpatialData(SpaceMode mode, int cellSizeMm, int width, int depth, int originXMm, int originZMm,
                            CellKind[] kinds, int[] heightsMm, bool[] hazards)
         {
             if (width <= 0 || depth <= 0 || cellSizeMm <= 0) throw new ArgumentException("invalid grid");

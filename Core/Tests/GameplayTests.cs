@@ -227,7 +227,7 @@ namespace VrAction.Core.Tests
         public void SpatialData_CopiesInputAndOutputArrays()
         {
             var kinds = new[] { CellKind.Ground, CellKind.Ground };
-            var d = new SpatialData(PlayMode.Tabletop, 50, 2, 1, 0, 0, kinds, new[] { 0, 0 }, new[] { false, false });
+            var d = new SpatialData(SpaceMode.Tabletop, 50, 2, 1, 0, 0, kinds, new[] { 0, 0 }, new[] { false, false });
             kinds[0] = CellKind.Wall;
             Assert.AreEqual(CellKind.Ground, d.KindAt(0, 0));
             var copy = d.KindsCopy(); copy[1] = CellKind.Wall;

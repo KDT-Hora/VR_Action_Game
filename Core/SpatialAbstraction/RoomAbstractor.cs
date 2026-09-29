@@ -52,7 +52,7 @@ namespace VrAction.Core.SpatialAbstraction
 
             foreach (var b in platformBoxes) TryBuildRamp(g, b[0], b[1], b[2], b[3], b[4]);
 
-            var data = g.Build(PlayMode.Room, outsideIsHazard: false);
+            var data = g.Build(SpaceMode.Room, outsideIsHazard: false);
             return AbstractionResult.Ok(data);
         }
 
