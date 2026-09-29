@@ -16,7 +16,7 @@ description: "Task list for VR現実空間連動型・小世界アクション�
 
 - [ ] T001 Create repo layout: `Core/`, `Core/Tests/`, `Game/` (Unity 6 project) per plan.md
 - [ ] T002 Initialize `Core/Core.csproj` (netstandard2.1, no UnityEngine reference) and `Core/Tests/Core.Tests.csproj` (NUnit); confirm `dotnet test` runs (0 tests)
-- [ ] T003 Initialize Unity 6 project in `Game/` with OpenXR + XR Interaction Toolkit; make `Core/` a UPM local package (`Core/package.json` + `Core.asmdef`) referenced via `Game/Packages/manifest.json` as `file:../../Core`; confirm Unity compiles it
+- [ ] T003 (FR-017) Initialize Unity 6 project in `Game/` with OpenXR + XR Interaction Toolkit; make `Core/` a UPM local package (`Core/package.json` + `Core.asmdef`) referenced via `Game/Packages/manifest.json` as `file:../../Core`; confirm Unity compiles it
 - [ ] T004 [P] Add `.gitignore` (Unity Library/Temp/Logs/obj, bin/obj) at repo root
 - [ ] T005 [P] Add `README.md` at repo root with build/test commands from quickstart.md
 
@@ -31,18 +31,20 @@ description: "Task list for VR現実空間連動型・小世界アクション�
 - [ ] T012 [TEST] PlayMode smoke: `FixtureScanProvider.ScanAsync` returns the desk and room fixtures in `Game/Assets/Tests/PlayMode/FixtureScanTests.cs` (Red)
 - [ ] T013 Implement `IScanProvider` + `FixtureScanProvider` in `Game/Assets/Scripts/Scan/` (Green)
 
-**Checkpoint**: `dotnet test` green, fixtures load in Unity.
+- [ ] T067 Spike (moved up from Phase 9; ID kept): if a headset is available, verify Meta MRUK scene data over PC link and record the result in `specs/001-vr-miniature-world/research.md`; if not, review the published MRUK scene data fields (anchor labels, plane/volume geometry) against `ScanResult` in `Core/Model/` and record any needed schema changes in research.md (FR-004, FR-017)
+
+**Checkpoint**: `dotnet test` green, fixtures load in Unity, `ScanResult` schema reviewed against the real scan source (T067).
 
 ## Phase 3: User Story 1 — 小さなキャラクターを机の上で操作する (P1) MVP
 
 **Independent Test**: 固定ステージ上で移動・ジャンプができ、覗き込める。
 
 - [ ] T014 [P] [US1] [TEST] Scale settings: clamps to 5–20cm, default 10cm in `Core/Tests/ScaleSettingsTests.cs` (Red)
-- [ ] T015 [P] [US1] Implement scale settings (pure C#) in `Core/Model/ScaleSettings.cs` and Unity wrapper `Game/Assets/Scripts/Presentation/ScaleSettingsBehaviour.cs` (Green)
+- [ ] T015 [P] [US1] Implement scale settings (pure C#, FR-001) in `Core/Model/ScaleSettings.cs` and Unity wrapper `Game/Assets/Scripts/Presentation/ScaleSettingsBehaviour.cs` (Green)
 - [ ] T016 [US1] [TEST] Movement/jump logic: input vector → position/velocity, jump only when grounded, gravity, in `Core/Tests/CharacterMotorTests.cs` (Red)
 - [ ] T017 [US1] Implement `CharacterMotor` (pure C#) in `Core/Character/CharacterMotor.cs` (FR-002) (Green)
 - [ ] T018 [US1] [TEST] PlayMode smoke: character in `Sandbox` scene moves and jumps from injected input in `Game/Assets/Tests/PlayMode/CharacterSmokeTests.cs` (Red)
-- [ ] T019 [US1] Create scene `Game/Assets/Scenes/Sandbox.unity` (XR rig, flat floor at desk height), character view `Game/Assets/Scripts/Character/CharacterView.cs`, controller input binding `Game/Assets/Scripts/Character/CharacterInput.cs` (FR-018) (Green)
+- [ ] T019 [US1] Create scene `Game/Assets/Scenes/Sandbox.unity` (XR rig, flat floor at desk height), character view `Game/Assets/Scripts/Character/CharacterView.cs`, controller input binding `Game/Assets/Scripts/Character/CharacterInput.cs` (FR-018); sword-holding child model (FR-022) (Green)
 - [ ] T020 [US1] [TEST] PlayMode: head-pose changes do not move the character; camera rig keeps real scale, in `Game/Assets/Tests/PlayMode/PeekRigTests.cs` (Red)
 - [ ] T021 [US1] Implement head-tracked peeking (player stays real-scale) in `Game/Assets/Scripts/Presentation/PeekRig.cs` (FR-003) (Green)
 - [ ] T022 [US1] [TEST] Posture offset: seated/standing height offsets are applied and survive recenter, in `Core/Tests/PostureTests.cs` (Red)
@@ -92,7 +94,7 @@ description: "Task list for VR現実空間連動型・小世界アクション�
 - [ ] T051 [P] [US4] [TEST] Enemy state machine (rule-based, no ML): idle→chase→attack transitions in `Core/Tests/EnemyStateTests.cs` (Red)
 - [ ] T052 [US4] Implement enemy state machine in `Core/Character/EnemyBrain.cs` and Unity binding `Game/Assets/Scripts/Game/EnemyController.cs` (FR-008) (Green)
 - [ ] T053 [P] [US4] [TEST] PlayMode: sword attack hits enemy in range once per swing; dodge grants brief invulnerability in `Game/Assets/Tests/PlayMode/CombatTests.cs` (Red)
-- [ ] T054 [US4] Implement `CombatController` in `Game/Assets/Scripts/Character/CombatController.cs` (Green)
+- [ ] T054 [US4] Implement `CombatController` (sword attack, FR-022) in `Game/Assets/Scripts/Character/CombatController.cs` (Green)
 - [ ] T055 [US4] [TEST] PlayMode: difficulty select before stage start applies the chosen mode; next-stage menu appears after clear in `Game/Assets/Tests/PlayMode/MenuFlowTests.cs` (Red)
 - [ ] T056 [US4] Implement `DifficultySelect.cs` (FR-026) and `NextStageMenu.cs` (FR-024) in `Game/Assets/Scripts/Game/` (Green)
 
@@ -102,7 +104,8 @@ description: "Task list for VR現実空間連動型・小世界アクション�
 
 - [ ] T057 [P] [US5] [TEST] Each stage type (Treasure, Combat, Defense, Boss) from the same spatial data is valid, reachable and has its objective in `Core/Tests/StageTypeTests.cs` (Red)
 - [ ] T058 [US5] Implement Treasure/Combat/Defense/Boss placement rules in `Core/StageGeneration/StageTypes/*.cs` (FR-012) (Green)
-- [ ] T059 [US5] Stage type selection in `NextStageMenu.cs` (Green, covered by T055 tests extended)
+- [ ] T059 [P] [US5] [TEST] PlayMode: NextStageMenu lists all stage types and passes the chosen type to the generator request in `Game/Assets/Tests/PlayMode/StageTypeSelectTests.cs` (Red)
+- [ ] T059a [US5] Stage type selection in `NextStageMenu.cs` (FR-024) (Green)
 
 ## Phase 8: Save, Share, Safety
 
@@ -112,18 +115,20 @@ description: "Task list for VR現実空間連動型・小世界アクション�
 - [ ] T063 Implement `ShareService.cs` with consent dialog (FR-025) in `Game/Assets/Scripts/Save/` (Green)
 - [ ] T064 [P] [TEST] SafetyMonitor decision logic: passthrough on when head/controller within 30cm of boundary or hazard; off with hysteresis; manual toggle overrides, in `Core/Tests/SafetyMonitorTests.cs` (Red)
 - [ ] T065 Implement `SafetyMonitor` (Core logic) and Unity binding `Game/Assets/Scripts/Presentation/SafetyMonitor.cs` (FR-014, FR-027) (Green)
-- [ ] T066 [P] [TEST] Verify no code path moves or alters real-world data: play session never writes to ScanResult/SpatialData (immutability test) in `Core/Tests/ImmutabilityTests.cs` (FR-015) (Red→Green)
+- [ ] T066 [P] [TEST] `ScanResult`/`SpatialData` are immutable: attempts to mutate after creation fail to compile or throw; generator/renderer APIs take read-only inputs, in `Core/Tests/ImmutabilityTests.cs` (FR-015) (Red)
+- [ ] T066a Make `ScanResult`/`SpatialData` immutable (readonly structs/records, `IReadOnlyList`) in `Core/Model/` (Green)
 
 ## Phase 9: Real scan (later, needs headset)
 
-- [ ] T067 Spike: verify Meta MRUK scene data over PC link on target headset; record result in `specs/001-vr-miniature-world/research.md`
+(T067 のスパイクは Phase 2 に移動済み)
+
 - [ ] T068 [TEST] `MetaSceneScanProvider` conversion: recorded MRUK sample → `ScanResult` matches expected in `Game/Assets/Tests/PlayMode/MetaSceneConversionTests.cs` (Red)
 - [ ] T069 Implement `MetaSceneScanProvider` in `Game/Assets/Scripts/Scan/MetaSceneScanProvider.cs` (fallback: `ManualTableScanProvider`) (Green)
 
 ## Phase 10: Polish & validation
 
 - [ ] T070 [P] Performance budget check at end of US2 and at the end: hold 90fps in Tabletop/Room scenes (FR-029)
-- [ ] T071 [P] Measure scan→generate ≤ 60s (SC-005) with fixture and real scan
+- [ ] T071 [P] Measure scan→generate ≤ 60s (SC-005: desk width ≥120cm, room floor area ≥10㎡) with fixture and real scan
 - [ ] T072 Playtest protocol and results (SC-001 ≤3min to play, SC-004 90% unaided, SC-008 80% "immersion" survey, SC-006 zero contacts) in `specs/001-vr-miniature-world/playtest.md`
 - [ ] T073 Run quickstart.md end-to-end and update it
 

@@ -36,3 +36,12 @@
 ## 状態遷移
 - Stage: `Generated → Playing → Cleared | Retry`
 - Character(CheckpointRespawn): `Alive → Down → Respawn`
+
+## Core の補助型(責務)
+- `ScaleSettings`: キャラクターサイズ。5〜20cmに丸め、既定10cm
+- `Posture`: 座位/立位の高さオフセット。再センタリング後も保持
+- `CharacterMotor`: 入力→位置・速度、接地時のみジャンプ、重力
+- `HealthSystem`: HP、Down状態、難易度モードごとの復活/落下復帰
+- `EnemyBrain`: 敵のルールベース状態機械(idle→chase→attack)。機械学習は使わない
+- `SafetyMonitor`: 頭部・コントローラーが境界/危険区域の30cm以内でパススルーON、ヒステリシス付き、手動切替が優先
+- `ScanResult` / `SpatialData` は生成後に変更不可(イミュータブル)
